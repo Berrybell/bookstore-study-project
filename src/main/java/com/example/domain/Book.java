@@ -1,17 +1,26 @@
 package com.example.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Book {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
 	private String title;
 	private String author;
 	private int year;
-	private int ISBN;
+	private String ISBN;
 	private double price;
 	
-	public Book(String title, String author, int year, int iSBN, double price) {
+	public Book(String title, String author, int year, String ISBN, double price) {
 		this.title = title;
 		this.author = author;
 		this.year = year;
-		ISBN = iSBN;
+		this.ISBN = ISBN;
 		this.price = price;
 	}
 	
@@ -43,12 +52,12 @@ public class Book {
 		this.year = year;
 	}
 
-	public int getISBN() {
+	public String getISBN() {
 		return ISBN;
 	}
 
-	public void setISBN(int iSBN) {
-		ISBN = iSBN;
+	public void setISBN(String ISBN) {
+		this.ISBN = ISBN;
 	}
 
 	public double getPrice() {
@@ -57,6 +66,20 @@ public class Book {
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", year=" + year + ", ISBN=" + ISBN
+				+ ", price=" + price + "]";
 	}
 
 }
