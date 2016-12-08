@@ -2,8 +2,6 @@ package com.example.web;
 
 import java.util.List;
 
-import javax.persistence.ManyToOne;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.domain.Book;
 import com.example.domain.BookRepository;
 import com.example.domain.CategoryRepository;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Controller
 public class BookController {
@@ -26,8 +23,13 @@ public class BookController {
 	
 	@RequestMapping(value="/index", method=RequestMethod.GET)
     public String index(Model model) {
-        return "index";        
+        return "booklist";        
     }
+	
+	 @RequestMapping(value="/login")
+	public String login() {	
+	    return "login";
+	}
 	
 	@RequestMapping(value = "/addbook")
     public String addBook(Model model){
@@ -56,8 +58,6 @@ public class BookController {
     }
 	
 	// RESTful service to get all books
-	@ManyToOne
-	@JsonIgnore
     @RequestMapping(value="/books", method = RequestMethod.GET)
     public @ResponseBody List<Book> bookListRest() {	
         return (List<Book>) repository.findAll();
